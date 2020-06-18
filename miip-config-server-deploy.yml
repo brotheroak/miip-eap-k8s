@@ -1,36 +1,28 @@
 apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
-        name: eap-ui-backend-deployment
+        name: miip-config-server-deployment
         labels:
-                app: eap-ui-backend
+                app: miip-config-server
 spec:
         replicas: 1
         selector:
                 matchLabels:
-                        app: eap-ui-backend
+                        app: miip-config-server
         template:
                 metadata:
                         labels:
-                                app: eap-ui-backend
+                                app: miip-config-server
                 spec:
                         containers:
-                                - name: eap-ui-backend
-                                  image: brotheroak/eap-ui-backend:1.0
+                                - name: miip-config-server
+                                  image: brotheroak/miip-config-server:1.0
                                   ports:
-                                          - containerPort: 13010
+                                          - containerPort: 10001
                                   imagePullPolicy: Always
                                   env:
                                           - name: SPRING_PROFILES_ACTIVE
                                             value: k8s
-                                          - name: MSSQL_DATABASE
-                                            value: miip
-                                          - name: MSSQL_SCHEMA
-                                            value: EAP
-                                          - name: MSSQL_PASSWORD
-                                            value: Eapadmin11
-                                          - name: MSSQL_USER
-                                            vlaue: eap_admin
                                   resource:
                                           requests:
                                                   memory: "256Mi"
