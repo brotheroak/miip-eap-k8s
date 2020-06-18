@@ -1,0 +1,41 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+        name: eap-ui-backend-deployment
+        labels:
+                app: eap-ui-backend
+spec:
+        replicas: 1
+        selector:
+                matchLabels:
+                        app: eap-ui-backend
+        template:
+                metadata:
+                        labels:
+                                app: eap-ui-backend
+                spec:
+                        containers:
+                                - name: eap-ui-backend
+                                  image: brotheroak/eap-ui-backend:1.0
+                                  ports:
+                                          - containerPort: 13010
+                                  imagePullPolicy: Always
+                                  env:
+                                          - name: SPRING_PROFILES_ACTIVE
+                                            value: gcp
+                                          - name: MSSQL_DATABASE
+                                            value: miip
+                                          - name: MSSQL_SCHEMA
+                                            value: EAP
+                                          - name: MSSQL_PASSWORD
+                                            value: Eapadmin11
+                                          - name: MSSQL_USER
+                                            vlaue: eap_admin
+                                  resource:
+                                          requests:
+                                                  memory: "256Mi"
+                                                  cpu: "0.25"
+                                          limits:
+                                                  memory: "1Gi"
+                                                  cpu: "0.5"
+

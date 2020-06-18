@@ -1,0 +1,36 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+        name: miip-mariadb-deployment
+        labels:
+                app: miip-mariadb
+spec:
+        replicas: 1
+        selector:
+                matchLabels:
+                        app: miip-mariadb
+        template:
+                metadata:
+                        labels:
+                                app: miip-mariadb
+                spec:
+                        containers:
+                                - name: miip-mariadb
+                                  image: mariadb
+                                  imagePullPolicy: Always
+                                  ports:
+                                          - containerPort: 3306
+                                  env:
+                                          - name: MARIADB_PASSWORD
+                                            value: miip
+                                  args:
+                                          - "--character-set-server=utf8mb4"
+                                          - "--collation-server=utf8mb4_unicode_ci"
+                                  resources:
+                                          requests:
+                                                  memory: "64Mi"
+                                                  cpu: "250m"
+                                          limits:
+                                                  memory: "128Mi"
+                                                  cpu: "500m"
+

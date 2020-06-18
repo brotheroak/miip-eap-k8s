@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+        name: eap-ui-frontend-deployment
+        labels:
+                app: eap-ui-frontend
+spec:
+        replicas: 1
+        selector:
+                matchLabels:
+                        app: eap-ui-frontend
+        template:
+                metadata:
+                        labels:
+                                app: frontend
+                spec:
+                        hostname: eap-ui-frontend
+                        tolerations:
+                                - effect: NoSchedule
+                                  key: DLWORK
+                                  operator: Equal
+                                  value: GPU
+                        containers:
+                                - name: frontend
+                                  image: brotheroak/ui-eap:1.0
+                                  imagePullPolicy: Always
+                                  ports:
+                                          - containerPort: 80
+                        imagePullSecrets:
+                                - name: dataplatform-registry
