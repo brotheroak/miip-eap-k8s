@@ -30,12 +30,5 @@ spec:
                                           - name: MSSQL_PASSWORD
                                             value: Eapadmin11
                                           - name: MSSQL_USER
-                                            vlaue: eap_admin
-                                  resource:
-                                          requests:
-                                                  memory: "256Mi"
-                                                  cpu: "0.25"
-                                          limits:
-                                                  memory: "1Gi"
-                                                  cpu: "0.5"
+                                            value: eap_admin
 

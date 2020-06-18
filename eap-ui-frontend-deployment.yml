@@ -12,7 +12,7 @@ spec:
         template:
                 metadata:
                         labels:
-                                app: frontend
+                                app: eap-ui-frontend 
                 spec:
                         hostname: eap-ui-frontend
                         tolerations:

@@ -23,11 +23,4 @@ spec:
                                   env:
                                           - name: SPRING_PROFILES_ACTIVE
                                             value: k8s
-                                  resource:
-                                          requests:
-                                                  memory: "256Mi"
-                                                  cpu: "0.25"
-                                          limits:
-                                                  memory: "1Gi"
-                                                  cpu: "0.5"
 

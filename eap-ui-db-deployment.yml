@@ -18,7 +18,7 @@ spec:
                                 - name: eap-ui-db
                                   image: mcr.microsoft.com/mssql/server:2019-latest
                                   ports:
-                                        - conatinerPort: 1433
+                                        - containerPort: 1433
                                   env:
                                         - name: MSSQL_PID
                                           value: "Developer"
@@ -30,9 +30,20 @@ spec:
                                                           name: mssql
                                                           key: SA_PASSWORD
                                   volumeMounts:
-                                        - name: mssqldb
+                                        - name: mssql-base-volume
+                                          mountPath: /var/opt/mssql
+                                        - name: mssql-ldf-volume
+                                          mountPath: /var/opt/mssql/ldf
+                                        - name: mssql-mdf-volume
+                                          mountPath: /var/opt/mssql/mdf
                         volumes:
-                                - name: mssqldb
+                                - name: mssql-base-volume
                                   persistentVolumeClaim:
-                                          claimName: mssql-data
+                                          claimName: mssql-base-volume
+                                - name: mssql-mdf-volume
+                                  persistentVolumeClaim:
+                                          claimName: mssql-mdf-volume
+                                - name: mssql-ldf-volume
+                                  persistentVolumeClaim:
+                                          claimName: mssql-ldf-volume
 
